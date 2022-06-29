@@ -929,6 +929,12 @@ public final class TriangleOuterClass {
      * <code>.Properties properties = 3;</code>
      */
     TriangleOuterClass.PropertiesOrBuilder getPropertiesOrBuilder();
+
+    /**
+     * <code>int32 struct = 4;</code>
+     * @return The struct.
+     */
+    int getStruct();
   }
   /**
    * Protobuf type {@code Triangle}
@@ -1000,6 +1006,11 @@ public final class TriangleOuterClass {
                 properties_ = subBuilder.buildPartial();
               }
 
+              break;
+            }
+            case 32: {
+
+              struct_ = input.readInt32();
               break;
             }
             default: {
@@ -1117,6 +1128,17 @@ public final class TriangleOuterClass {
       return getProperties();
     }
 
+    public static final int STRUCT_FIELD_NUMBER = 4;
+    private int struct_;
+    /**
+     * <code>int32 struct = 4;</code>
+     * @return The struct.
+     */
+    @java.lang.Override
+    public int getStruct() {
+      return struct_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1140,6 +1162,9 @@ public final class TriangleOuterClass {
       if (properties_ != null) {
         output.writeMessage(3, getProperties());
       }
+      if (struct_ != 0) {
+        output.writeInt32(4, struct_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1159,6 +1184,10 @@ public final class TriangleOuterClass {
       if (properties_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getProperties());
+      }
+      if (struct_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, struct_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1183,6 +1212,8 @@ public final class TriangleOuterClass {
         if (!getProperties()
             .equals(other.getProperties())) return false;
       }
+      if (getStruct()
+          != other.getStruct()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1202,6 +1233,8 @@ public final class TriangleOuterClass {
         hash = (37 * hash) + PROPERTIES_FIELD_NUMBER;
         hash = (53 * hash) + getProperties().hashCode();
       }
+      hash = (37 * hash) + STRUCT_FIELD_NUMBER;
+      hash = (53 * hash) + getStruct();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1345,6 +1378,8 @@ public final class TriangleOuterClass {
           properties_ = null;
           propertiesBuilder_ = null;
         }
+        struct_ = 0;
+
         return this;
       }
 
@@ -1378,6 +1413,7 @@ public final class TriangleOuterClass {
         } else {
           result.properties_ = propertiesBuilder_.build();
         }
+        result.struct_ = struct_;
         onBuilt();
         return result;
       }
@@ -1435,6 +1471,9 @@ public final class TriangleOuterClass {
         }
         if (other.hasProperties()) {
           mergeProperties(other.getProperties());
+        }
+        if (other.getStruct() != 0) {
+          setStruct(other.getStruct());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1713,6 +1752,37 @@ public final class TriangleOuterClass {
         }
         return propertiesBuilder_;
       }
+
+      private int struct_ ;
+      /**
+       * <code>int32 struct = 4;</code>
+       * @return The struct.
+       */
+      @java.lang.Override
+      public int getStruct() {
+        return struct_;
+      }
+      /**
+       * <code>int32 struct = 4;</code>
+       * @param value The struct to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStruct(int value) {
+        
+        struct_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 struct = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearStruct() {
+        
+        struct_ = 0;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -1787,11 +1857,11 @@ public final class TriangleOuterClass {
     java.lang.String[] descriptorData = {
       "\n-protobuf-examples/vs-prost/src/triangl" +
       "e.proto\"6\n\nProperties\022\014\n\002p1\030\001 \001(\005H\000\022\014\n\002p" +
-      "2\030\002 \001(\tH\000B\014\n\nproperties\"W\n\010Triangle\022\023\n\013d" +
+      "2\030\002 \001(\tH\000B\014\n\nproperties\"g\n\010Triangle\022\023\n\013d" +
       "escription\030\001 \001(\t\022\025\n\005color\030\002 \001(\0162\006.Color\022" +
-      "\037\n\nproperties\030\003 \001(\0132\013.Properties*2\n\005Colo" +
-      "r\022\013\n\007UNKNOWN\020\000\022\007\n\003RED\020\001\022\t\n\005GREEN\020\002\022\010\n\004BL" +
-      "UE\020\003b\006proto3"
+      "\037\n\nproperties\030\003 \001(\0132\013.Properties\022\016\n\006stru" +
+      "ct\030\004 \001(\005*2\n\005Color\022\013\n\007UNKNOWN\020\000\022\007\n\003RED\020\001\022" +
+      "\t\n\005GREEN\020\002\022\010\n\004BLUE\020\003b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1808,7 +1878,7 @@ public final class TriangleOuterClass {
     internal_static_Triangle_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Triangle_descriptor,
-        new java.lang.String[] { "Description", "Color", "Properties", });
+        new java.lang.String[] { "Description", "Color", "Properties", "Struct", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
