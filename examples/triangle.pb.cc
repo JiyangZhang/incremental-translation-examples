@@ -75,6 +75,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_protobuf_2dexamples_2fvs_2dpro
   PROTOBUF_FIELD_OFFSET(::Triangle, description_),
   PROTOBUF_FIELD_OFFSET(::Triangle, color_),
   PROTOBUF_FIELD_OFFSET(::Triangle, properties_),
+  PROTOBUF_FIELD_OFFSET(::Triangle, struct__),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::Properties)},
@@ -89,11 +90,11 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 const char descriptor_table_protodef_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n-protobuf-examples/vs-prost/src/triangl"
   "e.proto\"6\n\nProperties\022\014\n\002p1\030\001 \001(\005H\000\022\014\n\002p"
-  "2\030\002 \001(\tH\000B\014\n\nproperties\"W\n\010Triangle\022\023\n\013d"
+  "2\030\002 \001(\tH\000B\014\n\nproperties\"g\n\010Triangle\022\023\n\013d"
   "escription\030\001 \001(\t\022\025\n\005color\030\002 \001(\0162\006.Color\022"
-  "\037\n\nproperties\030\003 \001(\0132\013.Properties*2\n\005Colo"
-  "r\022\013\n\007UNKNOWN\020\000\022\007\n\003RED\020\001\022\t\n\005GREEN\020\002\022\010\n\004BL"
-  "UE\020\003b\006proto3"
+  "\037\n\nproperties\030\003 \001(\0132\013.Properties\022\016\n\006stru"
+  "ct\030\004 \001(\005*2\n\005Color\022\013\n\007UNKNOWN\020\000\022\007\n\003RED\020\001\022"
+  "\t\n\005GREEN\020\002\022\010\n\004BLUE\020\003b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto_deps[1] = {
 };
@@ -103,7 +104,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_pro
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto = {
-  false, false, descriptor_table_protodef_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto, "protobuf-examples/vs-prost/src/triangle.proto", 252,
+  false, false, descriptor_table_protodef_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto, "protobuf-examples/vs-prost/src/triangle.proto", 268,
   &descriptor_table_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto_once, descriptor_table_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto_sccs, descriptor_table_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto_deps, 2, 0,
   schemas, file_default_instances, TableStruct_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto::offsets,
   file_level_metadata_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto, 2, file_level_enum_descriptors_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto, file_level_service_descriptors_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto,
@@ -440,7 +441,9 @@ Triangle::Triangle(const Triangle& from)
   } else {
     properties_ = nullptr;
   }
-  color_ = from.color_;
+  ::memcpy(&color_, &from.color_,
+    static_cast<size_t>(reinterpret_cast<char*>(&struct__) -
+    reinterpret_cast<char*>(&color_)) + sizeof(struct__));
   // @@protoc_insertion_point(copy_constructor:Triangle)
 }
 
@@ -448,8 +451,8 @@ void Triangle::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Triangle_protobuf_2dexamples_2fvs_2dprost_2fsrc_2ftriangle_2eproto.base);
   description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&properties_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&color_) -
-      reinterpret_cast<char*>(&properties_)) + sizeof(color_));
+      reinterpret_cast<char*>(&struct__) -
+      reinterpret_cast<char*>(&properties_)) + sizeof(struct__));
 }
 
 Triangle::~Triangle() {
@@ -490,7 +493,9 @@ void Triangle::Clear() {
     delete properties_;
   }
   properties_ = nullptr;
-  color_ = 0;
+  ::memset(&color_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&struct__) -
+      reinterpret_cast<char*>(&color_)) + sizeof(struct__));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -523,6 +528,13 @@ const char* Triangle::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_properties(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 struct = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          struct__ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -579,6 +591,12 @@ failure:
         3, _Internal::properties(this), target, stream);
   }
 
+  // int32 struct = 4;
+  if (this->struct_() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_struct_(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -613,6 +631,13 @@ size_t Triangle::ByteSizeLong() const {
   if (this->color() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_color());
+  }
+
+  // int32 struct = 4;
+  if (this->struct_() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_struct_());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -655,6 +680,9 @@ void Triangle::MergeFrom(const Triangle& from) {
   if (from.color() != 0) {
     _internal_set_color(from._internal_color());
   }
+  if (from.struct_() != 0) {
+    _internal_set_struct_(from._internal_struct_());
+  }
 }
 
 void Triangle::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -680,8 +708,8 @@ void Triangle::InternalSwap(Triangle* other) {
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   description_.Swap(&other->description_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Triangle, color_)
-      + sizeof(Triangle::color_)
+      PROTOBUF_FIELD_OFFSET(Triangle, struct__)
+      + sizeof(Triangle::struct__)
       - PROTOBUF_FIELD_OFFSET(Triangle, properties_)>(
           reinterpret_cast<char*>(&properties_),
           reinterpret_cast<char*>(&other->properties_));
