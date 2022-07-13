@@ -1,34 +1,35 @@
-﻿class StorageQuickstart
+﻿// Copyright 2020 Google Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// [START storage_create_bucket]
+// [START storage_quickstart]
+
+using Google.Apis.Storage.v1.Data;
+using Google.Cloud.Storage.V1;
+using System;
+
+public class CreateBucketSample
 {
-    static void Main(string[] args)
+    public Bucket CreateBucket(
+        string projectId = "your-project-id",
+        string bucketName = "your-unique-bucket-name")
     {
-        // Your Google Cloud Platform project ID.
-        string projectId = "YOURPROJECTID";
-
-        // [END storage_quickstart]
-        Debug.Assert("YOURPROJECT" + "ID" != projectId,
-            "Edit Program.cs and replace YOURPROJECTID with your Google Project Id.");
-        // [START storage_quickstart]
-
-        // Instantiates a client.
-        using (StorageClient storageClient = StorageClient.Create())
-        {
-            // The name for the new bucket.
-            string bucketName = projectId + "testbucket";
-            try
-            {
-                // Creates the new bucket.
-                storageClient.CreateBucket(projectId, bucketName);
-                Console.WriteLine($"Bucket {bucketName} created.");
-            }
-            catch (Google.GoogleApiException e)
-            when (e.Error.Code == 409)
-            {
-                // The bucket already exists.  That's fine.
-                Console.WriteLine(e.Error.Message);
-            }
-        }
+        var storage = StorageClient.Create();
+        var bucket = storage.CreateBucket(projectId, bucketName);
+        Console.WriteLine($"Created {bucketName}.");
+        return bucket;
     }
 }
-
-
+// [END storage_quickstart]
+// [END storage_create_bucket]
